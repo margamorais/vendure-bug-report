@@ -1,2 +1,12 @@
 # vendure-bug-report
-Repo corresponding to vendure compilation error.
+
+## Steps to reproduce
+
+1 - Create Postgres DB with name vendure_db with Username: admin Password: admin
+2 - Run
+```
+npm i
+npm run populate
+npm run build
+npm run start
+```

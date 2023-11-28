@@ -1,0 +1,80 @@
+<!-- The data table -->
+<vdr-data-table-2
+        id="financings-list"
+        [items]="items$ | async"
+        [itemsPerPage]="10"
+        [totalItems]="totalItems$ | async"
+        [currentPage]="1"
+        [filters]="filters"
+        (pageChange)="setPageNumber($event)"
+        (itemsPerPageChange)="setItemsPerPage($event)"
+>
+    <!-- Bulk Actions -->
+    <vdr-bulk-action-menu
+            locationId="financings-list"
+            [hostComponent]="this"
+            [selectionManager]="selectionManager"
+    />
+
+    <!-- Table Columns -->
+    <vdr-dt2-column [heading]="'Operation ID' | translate">
+        <ng-template let-financing="item">
+            <a class="button-ghost" href="" target="_blank">
+                <clr-icon shape="arrow" dir="right"></clr-icon>
+                {{ financing.id }}
+            </a>
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'createdAt' | translate" [sort]="sorts.get('createdAt')">
+        <ng-template let-financing="item">
+            {{ financing.createdAt }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'updatedAt' | translate" [sort]="sorts.get('updatedAt')"  [hiddenByDefault]="true">
+        <ng-template let-financing="item">
+            {{ financing.updatedAt }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'operation' | translate">
+        <ng-template let-financing="item">
+            {{ financing.operation }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'status' | translate">
+        <ng-template let-financing="item">
+            {{ financing.status }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'Total Amount' | translate">
+        <ng-template let-financing="item">
+            {{ financing.financingAmount }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'Duration (days)' | translate" [hiddenByDefault]="true">
+        <ng-template let-financing="item">
+            {{ financing.term }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'Customer Details' | translate" [hiddenByDefault]="true">
+        <ng-template let-financing="item">
+            {{ financing.name }}
+        </ng-template>
+    </vdr-dt2-column>
+
+    <vdr-dt2-column [heading]="'Order Details' | translate">
+        <ng-template let-financing="item">
+            <a class="button-ghost" [routerLink]="['/orders/', financing.orderId]">
+                {{ financing.orderId }}
+                <clr-icon shape="arrow" dir="right"></clr-icon>
+            </a>
+        </ng-template>
+    </vdr-dt2-column>
+
+</vdr-data-table-2>
